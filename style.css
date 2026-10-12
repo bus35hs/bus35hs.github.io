@@ -97,12 +97,7 @@ a:focus-visible {
   height: 60px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--accent);
-  border: 4px solid var(--white);
   box-shadow: 0 5px 0 var(--ink);
-  display: grid;
-  place-items: center;
-  color: var(--white);
 }
 
 .brand-name { font-weight: 800; font-size: 26px; letter-spacing: -0.01em; }
@@ -169,9 +164,22 @@ a:focus-visible {
   z-index: 2;
   margin-top: -48px;
   background: var(--white);
-  padding: 36px clamp(28px, 5vw, 72px) 44px;
+  padding: 26px clamp(28px, 5vw, 72px) 40px;
   transform: rotate(-2.5deg);
   clip-path: polygon(3% 7%, 100% 0, 97% 100%, 0 95%);
+}
+
+.hero-role {
+  width: fit-content;
+  margin: 0 auto 12px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--frame);
+  color: var(--white);
+  font-weight: 800;
+  font-size: clamp(12px, 1.4vw, 15px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .hero-title { text-align: center; line-height: 0.86; }
@@ -190,7 +198,7 @@ a:focus-visible {
   position: relative;
   z-index: 2;
   margin: 0;
-  max-width: 36ch;
+  max-width: 32ch;
   text-align: center;
   font-size: clamp(18px, 2vw, 22px);
   line-height: 1.5;
