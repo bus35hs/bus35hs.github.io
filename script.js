@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach((el) => observer.observe(el));
   }
 
+  // Beri nomor urut ke anak [data-stagger] supaya CSS bisa menunda tiap anak
+  document.querySelectorAll('[data-stagger]').forEach((group) => {
+    Array.from(group.children).forEach((child, i) => child.style.setProperty('--i', i));
+  });
+
   // Tahun di footer selalu terkini
   const year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());

@@ -603,24 +603,57 @@ a:focus-visible {
   to   { opacity: 1; transform: rotate(-2.5deg); }
 }
 
+/* Isi hero lainnya menyusul setelah kartu nama. Pakai properti translate
+   supaya tidak menimpa rotate() yang sudah ada di transform. */
+@keyframes rise-in {
+  from { opacity: 0; translate: 0 40px; }
+  to   { opacity: 1; translate: none; }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; translate: -120px 60px; }
+  to   { opacity: 1; translate: none; }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; translate: 120px 60px; }
+  to   { opacity: 1; translate: none; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .hero-card { animation: card-in 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.15) both; }
+  .hero-intro { animation: rise-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s both; }
+  .hero-actions { animation: rise-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+  .mock-phone-wrap { animation: slide-in-left 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.75s both; }
+  .mock-browser-wrap { animation: slide-in-right 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both; }
 }
 
 /* Fade-in saat scroll. Hanya aktif kalau script.js berhasil memasang class "js"
    di <html>; tanpa itu, semua konten langsung terlihat. */
 .js .reveal {
   opacity: 0;
-  transform: translateY(48px);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(72px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
+/* Anak dari [data-stagger] muncul satu per satu setelah induknya terlihat.
+   Urutan (--i) dipasang oleh script.js. */
+.js .reveal [data-stagger] > * {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity 0.5s ease, translate 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(300ms + var(--i, 0) * 80ms);
+}
+.js .reveal.is-visible [data-stagger] > * {
+  opacity: 1;
+  translate: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .lift, .lift:hover { transition: none; transform: none; }
-  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal,
+  .js .reveal [data-stagger] > * { opacity: 1; transform: none; translate: none; transition: none; }
 }
